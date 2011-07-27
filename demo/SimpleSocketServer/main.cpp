@@ -23,7 +23,7 @@ void* DoDetail(void*  param)
 	
 	while(true)
 	{
-		//memset(tempBuffer, 0, sizeof(tempBuffer));
+		memset(tempBuffer, 0, m_maxBufferLength);
 		
 		receivedLength = recv(myDetailData->socketHandle,tempBuffer,m_maxBufferLength,0);
 		if(receivedLength<1)
@@ -33,8 +33,12 @@ void* DoDetail(void*  param)
 		}
 		
 		tempBuffer[receivedLength]='\0';
-		cout <<"Received : "<<tempBuffer << " . Length is "<<receivedLength<<endl;
-		
+		//cout <<"Received : "<<tempBuffer << " . Length is "<<receivedLength<<endl;
+		printf("RECE from %s (%d - %d -%d) %s \r\n",myDetailData->clientID,
+			   myDetailData->socketHandle,
+			   myDetailData->port,
+			   receivedLength,
+			   tempBuffer);
 	}
 }
 
@@ -82,7 +86,10 @@ int main (int argc, char * const argv[]) {
 			
 			continue;
 		}
-		cout<<"Accepted OK"<<endl;
+		//Get the client detail info
+		char* clientAddress=inet_ntoa(localAddress.sin_addr);
+		int clientPort=ntohl(localAddress.sin_port);
+		printf("Accepted (SOCKET: %d/ Address:%s /Port:%d) \r\n",sendSocket,clientAddress,clientPort);
 		
 		FSocketStruct mySendingData;
 		mySendingData.socketHandle=sendSocket;

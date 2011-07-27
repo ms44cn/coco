@@ -34,17 +34,23 @@ Start:
 		cout <<"Create socket error"<<endl;
 		goto Start;
 	}
+	printf("Create Socket %d (Port:%d) \r\n",mySocket,port);;
 	//cycle to sending data
 	while (true)
 	{
-		memset(myData, 0, sizeof(myData));
+		memset(myData, 0, MyDataBufferLength);
 		
 		cout << "Sending :";
 		cin>>myData;
 		
-		bool sendStatus=myEngine.Send(mySocket,myData,sizeof(myData));
-		
-		cout << "Sent status is  "<< sendStatus <<endl;
+		bool sendStatus=myEngine.Send(mySocket,myData,MyDataBufferLength);
+	    if(sendStatus)
+		{
+			cout<<"Sent successful"<<endl;
+		}
+		else {
+			cout << "Sent failure"<<endl;
+		}
 		if(sendStatus==false)
 		{
 			goto Start;
