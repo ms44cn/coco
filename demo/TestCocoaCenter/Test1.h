@@ -12,10 +12,12 @@
 @interface Test1 : NSObject 
 {
 	IBOutlet NSTextField	*myTextField;
+	id myRuntimeVar; //dynamic object
+	
 }
 
 - (IBAction) ShowInt:(id)sender;
 - (IBAction) ShowString:(id)sender;
 - (IBAction) ShowMessageBox:(id)sender;
-
+-(IBAction)TestSEH:(id)sender;
 @end

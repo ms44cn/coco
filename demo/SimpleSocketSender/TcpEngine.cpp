@@ -1,23 +1,20 @@
-
-
-
 #include "TcpEngine.h"
 #include <stdio.h>   
 #include <stdlib.h>   
 #include <string.h>
 
-#ifdef WindowPlatform
+#if defined WindowPlatform
 #include "StdAfx.h"
 #include <winsock.h>
 #include <windows.h>
+#else
+	#if defined MacOSPlatform
+	#include <unistd.h>
+	#include <netinet/in.h>
+	#include <arpa/inet.h>
+	#else
+	#endif
 #endif
-
-#ifdef MacOSPlatform
-#include <unistd.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#endif
-
 
 #include <iostream>
 #include <iomanip>
@@ -51,6 +48,7 @@ SOCKET CTcpEngine::ConnectToHost(char ipAddress[], int port)
 	if(INVALID_SOCKET == mySocket)
 	{
 		cout << "socket failed!" << endl;
+		
 		#ifdef WindowPlatform
 		WSACleanup();
 		#endif
@@ -82,10 +80,13 @@ bool CTcpEngine::Send(SOCKET mySocket,char* sendingBuffer,int length)
 {
 	if (SOCKET_ERROR == send(mySocket, sendingBuffer, length, 0))
 	{
-		#ifdef WindowPlatform
+		#if defined WindowPlatform
 		int errorCode=WSAGetLastError(); 
-		cout << "send failed .Error code : "<< errorCode << endl;
-#endif	
+		cout << "sent failure .Error code : "<< errorCode << endl;
+		#else
+		cout <<"sent failure"<<endl;
+		#endif
+		
 		return false;
 	}
 
@@ -97,12 +98,15 @@ void CTcpEngine::Close(SOCKET socket)
 {
 	
 
-#ifdef WindowPlatform
+#if defined WindowPlatform
 	WSACleanup();
 	closesocket(socket);
-#endif
+#else
 	
-#ifdef	MacOSPlatform
+	#if defined	MacOSPlatform
 	close(socket);
+	#else 
+	close(socket);
+	#endif
 #endif
 }

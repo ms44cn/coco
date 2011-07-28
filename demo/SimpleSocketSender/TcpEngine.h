@@ -2,15 +2,15 @@
 //#define WindowPlatform
 #define MacOSPlatform
 
-#ifdef WindowPlatform
+#if defined WindowPlatform
 #include <winsock.h>
-#endif
-
-#ifdef MacOSPlatform
-#include <sys/socket.h>
-typedef unsigned int SOCKET;
-#define INVALID_SOCKET (SOCKET)(~0)
-#define SOCKET_ERROR (-1)
+#else
+	#if defined MacOSPlatform
+	#include <sys/socket.h>
+	typedef unsigned int SOCKET;
+	#define INVALID_SOCKET (SOCKET)(~0)
+	#define SOCKET_ERROR (-1)
+	#endif
 #endif
 
 class CTcpEngine

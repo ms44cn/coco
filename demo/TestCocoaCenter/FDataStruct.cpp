@@ -7,9 +7,15 @@
  *
  */
 
-#include "FDataStruct.h"
-
-FDataStruct::FDataStruct(void)
-{
-	
-}
+//#include "FDataStruct.h"
+//
+//
+//FDataStruct::FDataStruct(void)
+//{
+//	
+//}
+//
+//int FDataStruct::TestMethod()
+//{
+//	return 100;
+//}

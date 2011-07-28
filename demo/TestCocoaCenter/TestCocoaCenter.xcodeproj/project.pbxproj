@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B132F7B13E0CB5800EBFABC /* FDataStruct.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B132F7A13E0CB5800EBFABC /* FDataStruct.cpp */; };
 		1B1D59BE13DF9E8E007E31C8 /* Test1.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B1D59BD13DF9E8E007E31C8 /* Test1.m */; };
+		1BE9370513E1310800BC8B5B /* MyCocoaObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE9370413E1310800BC8B5B /* MyCocoaObject.m */; };
+		1BE937AC13E144F200BC8B5B /* MyChildCocoaObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BE937AB13E144F200BC8B5B /* MyChildCocoaObject.m */; };
+		1BE9386513E15C2200BC8B5B /* Tasks in Resources */ = {isa = PBXBuildFile; fileRef = 1BE9386413E15C2200BC8B5B /* Tasks */; };
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		256AC3DA0F4B6AC300CF3369 /* TestCocoaCenterAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* TestCocoaCenterAppDelegate.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -19,8 +23,15 @@
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		1B132F7913E0CB5800EBFABC /* FDataStruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDataStruct.h; sourceTree = "<group>"; };
+		1B132F7A13E0CB5800EBFABC /* FDataStruct.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FDataStruct.cpp; sourceTree = "<group>"; };
 		1B1D59BC13DF9E8E007E31C8 /* Test1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Test1.h; sourceTree = "<group>"; };
 		1B1D59BD13DF9E8E007E31C8 /* Test1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Test1.m; sourceTree = "<group>"; };
+		1BE9370313E1310800BC8B5B /* MyCocoaObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCocoaObject.h; sourceTree = "<group>"; };
+		1BE9370413E1310800BC8B5B /* MyCocoaObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCocoaObject.m; sourceTree = "<group>"; };
+		1BE937AA13E144F200BC8B5B /* MyChildCocoaObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyChildCocoaObject.h; sourceTree = "<group>"; };
+		1BE937AB13E144F200BC8B5B /* MyChildCocoaObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyChildCocoaObject.m; sourceTree = "<group>"; };
+		1BE9386413E15C2200BC8B5B /* Tasks */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Tasks; sourceTree = "<group>"; };
 		1DDD58150DA1D0A300B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		256AC3D80F4B6AC300CF3369 /* TestCocoaCenterAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestCocoaCenterAppDelegate.h; sourceTree = "<group>"; };
 		256AC3D90F4B6AC300CF3369 /* TestCocoaCenterAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestCocoaCenterAppDelegate.m; sourceTree = "<group>"; };
@@ -51,6 +62,12 @@
 				256AC3D90F4B6AC300CF3369 /* TestCocoaCenterAppDelegate.m */,
 				1B1D59BC13DF9E8E007E31C8 /* Test1.h */,
 				1B1D59BD13DF9E8E007E31C8 /* Test1.m */,
+				1B132F7913E0CB5800EBFABC /* FDataStruct.h */,
+				1B132F7A13E0CB5800EBFABC /* FDataStruct.cpp */,
+				1BE9370313E1310800BC8B5B /* MyCocoaObject.h */,
+				1BE9370413E1310800BC8B5B /* MyCocoaObject.m */,
+				1BE937AA13E144F200BC8B5B /* MyChildCocoaObject.h */,
+				1BE937AB13E144F200BC8B5B /* MyChildCocoaObject.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -89,6 +106,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				1BE9386413E15C2200BC8B5B /* Tasks */,
 			);
 			name = TestCocoaCenter;
 			sourceTree = "<group>";
@@ -173,6 +191,7 @@
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
+				1BE9386513E15C2200BC8B5B /* Tasks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +205,9 @@
 				8D11072D0486CEB800E47090 /* main.m in Sources */,
 				256AC3DA0F4B6AC300CF3369 /* TestCocoaCenterAppDelegate.m in Sources */,
 				1B1D59BE13DF9E8E007E31C8 /* Test1.m in Sources */,
+				1B132F7B13E0CB5800EBFABC /* FDataStruct.cpp in Sources */,
+				1BE9370513E1310800BC8B5B /* MyCocoaObject.m in Sources */,
+				1BE937AC13E144F200BC8B5B /* MyChildCocoaObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

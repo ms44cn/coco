@@ -16,11 +16,14 @@ int m_maxBufferLength=4096;
 
 void* DoDetail(void*  param)
 {
-	FSocketStruct* myDetailData=(FSocketStruct*) param;
+	FSocketStruct* myDetailData=new FSocketStruct();
+	memcpy(myDetailData,param,sizeof(myDetailData));
 	
 	int receivedLength;
 	char* tempBuffer=new char[m_maxBufferLength];
 	
+	try
+	{
 	while(true)
 	{
 		memset(tempBuffer, 0, m_maxBufferLength);
@@ -34,12 +37,21 @@ void* DoDetail(void*  param)
 		
 		tempBuffer[receivedLength]='\0';
 		//cout <<"Received : "<<tempBuffer << " . Length is "<<receivedLength<<endl;
-		printf("RECE from %s (%d - %d -%d) %s \r\n",myDetailData->clientID,
+		printf("RECE from %s (Socket:%d/Port:%d/Length:%d) %s \r\n",myDetailData->clientID,
 			   myDetailData->socketHandle,
 			   myDetailData->port,
 			   receivedLength,
 			   tempBuffer);
 	}
+	}
+	catch (...) {
+		if(NULL!=myDetailData)
+		{
+			delete[] myDetailData;
+			delete[] tempBuffer;
+		}
+	}
+
 }
 
 int main (int argc, char * const argv[]) {

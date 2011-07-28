@@ -7,7 +7,9 @@
 //
 
 #import "Test1.h"
-
+#import "MyCocoaObject.h"
+#import	"FDataStruct.h"
+#import <objc/objc-runtime.h>
 
 @implementation Test1
 - (IBAction) ShowInt:(id)sender
@@ -28,7 +30,49 @@
 
 - (IBAction) ShowMessageBox:(id)sender
 {
+	//Declare oc object
+	MyCocoaObject* myData=[[MyCocoaObject alloc]init];
+	if(nil==myData)
+	{
+		assert(FALSE);
+	}
+    //Check is that type (like is/as in C#)
+	if([myData isKindOfClass:[MyCocoaObject class]])
+	{
+	}
 	
+	@try {
+		NSLog("%d",myData->a);
+	}
+	@catch (NSException * e) {
+		NSLog("Detail Error is : %@",e.description);
+	}
+	@finally {
+		
+	}
+	
+	
+	[myData release];
+	
+	//Declare native C++ object
+//	FDataStruct* myNativeObject =new FDataStruct();
+//	int a= myNativeObject.TestMethod();
+//	assert(a==100);
 }
 
+-(IBAction)TestSEH:(id)sender
+{
+	int a=100;
+	@try {
+		a=300;
+	}
+	@catch (NSException * e)//NSException* is the super class of exception .so this like(catch(...))
+	{
+		NSLog(@"catched");
+	}
+	@finally {	
+		a=20;
+	}
+	
+}
 @end
