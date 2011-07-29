@@ -23,6 +23,7 @@ public:
 	SOCKET ConnectToHost(char ipAddress[], int port);
 	bool Send(SOCKET mySocket,char* sendingBuffer,int length);
 	void Close(SOCKET socket);
+	char* GetLocalIpAddress();
 
 private :
 	int m_SendContentMaxLength;

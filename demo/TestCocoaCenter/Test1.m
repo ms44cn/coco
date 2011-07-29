@@ -42,10 +42,10 @@
 	}
 	
 	@try {
-		NSLog("%d",myData->a);
+		NSLog(@"%d",myData->a);
 	}
 	@catch (NSException * e) {
-		NSLog("Detail Error is : %@",e.description);
+		NSLog(@"Detail Error is : %s",e.description);
 	}
 	@finally {
 		

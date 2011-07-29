@@ -29,6 +29,10 @@
 	NSString* object3=@"3";
 	
 	NSArray* myArrayObject = [NSArray arrayWithObjects:object1, object2, object3, nil];
+	
+	[myArrayObject addObject:@"4"]; //add object to array object
+	[myArrayObject insertObject:@"5" atIndex:5]; //insert object
+	
 	NSEnumerator* myEnumator = [myArrayObject objectEnumerator];
 	
 	NSString* aString = @"foo";
