@@ -7,7 +7,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include "MySocketStruct.h"
-
+#include "TcpEngine.h"
 
 using namespace std;
 
@@ -42,6 +42,8 @@ void* DoDetail(void*  param)
 			   myDetailData->port,
 			   receivedLength,
 			   tempBuffer);
+		
+		send(myDetailData->socketHandle,"I've received your data",30,0);
 	}
 	}
 	catch (...) {
@@ -52,6 +54,13 @@ void* DoDetail(void*  param)
 		}
 	}
 
+}
+
+char* GetIpAddress()
+
+{
+	CTcpEngine engine;
+    return engine.GetLocalIpAddress();
 }
 
 int main (int argc, char * const argv[]) {
@@ -69,7 +78,7 @@ int main (int argc, char * const argv[]) {
 		return -1;
 	}
 	
-	char* remoteServer="127.0.0.1";
+	char* remoteServer=GetIpAddress();
 	
 	localAddress.sin_port=htons(m_port);
 	localAddress.sin_family=AF_INET;

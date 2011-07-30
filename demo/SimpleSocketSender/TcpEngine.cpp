@@ -12,6 +12,7 @@
 	#include <unistd.h>
 	#include <netinet/in.h>
 	#include <arpa/inet.h>
+	#include <netdb.h>
 	#else
 	#endif
 #endif
@@ -25,6 +26,8 @@ using namespace std;
 
 CTcpEngine::CTcpEngine(void)
 {
+	m_SendContentMaxLength=4096;
+	m_ReceiveContentMaxLength=4096;
 }
 
 
@@ -36,15 +39,29 @@ char* CTcpEngine::GetLocalIpAddress()
 {
 	char* myIpAddress=NULL;
 	char name[32]="";
-	PHOSTENT hostinfo;
+	
+	#if defined WindowPlatform
+	PHOSTENT hostInfo;
 	
 	if(gethostname (name, sizeof(name)) == 0)
 	{ 
-		if((hostinfo = gethostbyname(name)) != NULL) 
+		if((hostInfo = gethostbyname(name)) != NULL) 
 		{ 
-			myIpAddress = inet_ntoa (*(struct in_addr *)*hostinfo->h_addr_list);
+			myIpAddress = inet_ntoa (*(struct in_addr *)*hostInfo->h_addr_list);
 		}
 	}
+	#else
+	hostent* hostInfo;
+	if(gethostname (name, sizeof(name)) == 0)
+	{ 
+		hostInfo = gethostbyname(name);
+		if(NULL!=hostInfo) 
+		{ 
+			myIpAddress = inet_ntoa (*(struct in_addr *)*hostInfo->h_addr_list);
+		}
+	}
+	#endif
+	
 	return myIpAddress;
 }
 
@@ -94,7 +111,8 @@ SOCKET CTcpEngine::ConnectToHost(char ipAddress[], int port)
 
 bool CTcpEngine::Send(SOCKET mySocket,char* sendingBuffer,int length)
 {
-	if (SOCKET_ERROR == send(mySocket, sendingBuffer, length, 0))
+	int ret=send(mySocket, sendingBuffer, length, 0);
+	if (SOCKET_ERROR == ret)
 	{
 		#if defined WindowPlatform
 		int errorCode=WSAGetLastError(); 
@@ -108,6 +126,65 @@ bool CTcpEngine::Send(SOCKET mySocket,char* sendingBuffer,int length)
 
 	return true;
 }
+
+char* CTcpEngine::SendAndReceive(SOCKET mySocket,char* data ,int length )
+{
+	char* receivedData=NULL;
+	
+	receivedData=new char[m_ReceiveContentMaxLength];
+	memset(receivedData,0,m_ReceiveContentMaxLength);
+	
+	if(Send(mySocket,data,length))
+	{
+		int receivedLength=recv(mySocket,receivedData,m_ReceiveContentMaxLength,0);
+		//printf("received length %d \r\n",receivedLength);
+	}
+	
+	
+	return receivedData;
+}
+
+char* CTcpEngine::GetHostNameFromAddress(const char* ipAddress)
+{
+	struct in_addr ip;
+	struct hostent *hp;
+	
+	if (!inet_aton(ipAddress, &ip))
+	{
+		//errx(1, "can't parse IP address %s", ipAddress);
+	}
+	
+	if ((hp = gethostbyaddr((const void *)&ip,
+							sizeof ip, AF_INET)) == NULL)
+	{
+		//errx(1, "no name associated with %s", ipstr);
+	}
+	
+	return  hp->h_name;
+}
+
+void CTcpEngine::SetSendMaxLength(int length)
+{
+	m_SendContentMaxLength=length;
+}
+
+
+void CTcpEngine::SetReceiveMaxLength(int length)
+{
+	m_ReceiveContentMaxLength=length;
+}
+
+int CTcpEngine::GetSendMaxLength()
+{
+	return m_SendContentMaxLength;
+}
+
+
+int CTcpEngine::GetReceiveMaxLength()
+{
+	return m_ReceiveContentMaxLength;
+}
+
 
 ///Close socket connection
 void CTcpEngine::Close(SOCKET socket)

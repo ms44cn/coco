@@ -19,13 +19,28 @@ public:
 	CTcpEngine(void);
 	~CTcpEngine(void);
 
-	void SetMaxBufferLength(int length);
+	void SetSendMaxLength(int length);
+	void SetReceiveMaxLength(int length);
+	
+	int GetSendMaxLength();
+	int GetReceiveMaxLength();	
+	
 	SOCKET ConnectToHost(char ipAddress[], int port);
+	
+	//Just send data
 	bool Send(SOCKET mySocket,char* sendingBuffer,int length);
+	
+	//Send data and received immediately
+	char* SendAndReceive(SOCKET mySocket,char* data ,int length );
+	
+	//Get the host name from ip address
+	char* GetHostNameFromAddress(const char* ipAddress);
+	
 	void Close(SOCKET socket);
 	char* GetLocalIpAddress();
 
 private :
 	int m_SendContentMaxLength;
+	int m_ReceiveContentMaxLength;
 };
 

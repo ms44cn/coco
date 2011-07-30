@@ -12,11 +12,11 @@ using namespace std;
 
 int main (int argc, char * const argv[])
 {
-	int MyDataBufferLength=4096;
+
 	char remoteServer[50];
 	int port;
 		
-	char* myData=new char[MyDataBufferLength];
+	bool isJustSendingMode=false;
 	
 	
 Start:
@@ -28,33 +28,56 @@ Start:
 	cin >> port;
 
 	CTcpEngine myEngine;
+	int maxBufferLength=myEngine.GetSendMaxLength();
+	char* myData=new char[maxBufferLength];
+	
 	SOCKET mySocket=myEngine.ConnectToHost(remoteServer, port);
 	if(SOCKET_ERROR==mySocket)
 	{
 		cout <<"Create socket error"<<endl;
 		goto Start;
 	}
+	
 	printf("Create Socket %d (Port:%d) \r\n",mySocket,port);;
 	//cycle to sending data
 	while (true)
 	{
-		memset(myData, 0, MyDataBufferLength);
+		memset(myData, 0, maxBufferLength);
 		
 		cout << "Sending :";
 		cin>>myData;
 		
-		bool sendStatus=myEngine.Send(mySocket,myData,MyDataBufferLength);
+		if(isJustSendingMode)
+		{		
+			
+			bool sendStatus=myEngine.Send(mySocket,myData,maxBufferLength);
 	    if(sendStatus)
 		{
 			cout<<"Sent successful"<<endl;
 		}
-		else {
-			cout << "Sent failure"<<endl;
-		}
-		if(sendStatus==false)
+		else
 		{
+			cout << "Sent failure"<<endl;
 			goto Start;
 		}
+
+		}
+		else {
+			char* backData=myEngine.SendAndReceive(mySocket, myData, maxBufferLength);
+			if(NULL!=backData)
+			{
+				cout<<"Sent successful and received :  "<<backData<<endl;
+				
+			}
+			else
+			{
+				cout << "Sent failure"<<endl;
+				goto Start;
+			}
+
+		}
+
+
 	}
 	
 	
@@ -62,47 +85,7 @@ Start:
 	
 	delete[] myData;
 	cout << "Completed"<<endl;
-	/*
-	mySocket=socket(AF_INET,SOCK_STREAM,0);
-	if(-1==mySocket)
-	{
-		cout <<" Create socket error"<<endl;
-		return -1;
-	}
-	struct sockaddr_in myAddress;
-	myAddress.sin_family=AF_INET;
-	
-	myAddress.sin_port=htons(port);
-	//Convert ip address from string to IPv4/v6 binary format
-	inet_pton(AF_INET,remoteServer,&myAddress.sin_addr);
-	
-	//connect
-	int connectStatus=0;
-	connectStatus =connect(mySocket,(struct sockaddr*)&myAddress, sizeof(myAddress)); 
-	if( -1 == connectStatus)
-	{
-		cout<<"connect error"<<endl;
-		return -1;
-		goto Start;
-	}
-	
-	
-	while (true)
-	{
-		memset(myData, 0, sizeof(myData));
-		
-		cout << "Sending :"<<endl;
-		cin>>myData;
-		
-		int sendDataCount=send(mySocket,myData,sizeof(myData),0);
-		cout << "Sent "<<sendDataCount<<endl;
-	}
-	
-	
-	close(mySocket);
-	delete[] myData;
-	cout << "Completed"<<endl;
-*/
+
 	
     return 0;
 }

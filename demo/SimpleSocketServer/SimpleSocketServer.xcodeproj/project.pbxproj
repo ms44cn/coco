@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1B6E873113E2F04700C8B4FD /* TcpEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1B6E872F13E2F04700C8B4FD /* TcpEngine.cpp */; };
 		8DD76F650486A84900D96B5E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 08FB7796FE84155DC02AAC07 /* main.cpp */; settings = {ATTRIBUTES = (); }; };
 		8DD76F6A0486A84900D96B5E /* SimpleSocketServer.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* SimpleSocketServer.1 */; };
 /* End PBXBuildFile section */
@@ -26,6 +27,8 @@
 
 /* Begin PBXFileReference section */
 		08FB7796FE84155DC02AAC07 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		1B6E872F13E2F04700C8B4FD /* TcpEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TcpEngine.cpp; path = ../SimpleSocketSender/TcpEngine.cpp; sourceTree = SOURCE_ROOT; };
+		1B6E873013E2F04700C8B4FD /* TcpEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TcpEngine.h; path = ../SimpleSocketSender/TcpEngine.h; sourceTree = SOURCE_ROOT; };
 		1BB13AE413D5681F00988871 /* MySocketStruct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MySocketStruct.h; sourceTree = "<group>"; };
 		8DD76F6C0486A84900D96B5E /* SimpleSocketServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SimpleSocketServer; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6859E8B029090EE04C91782 /* SimpleSocketServer.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = SimpleSocketServer.1; sourceTree = "<group>"; };
@@ -55,6 +58,8 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				1B6E872F13E2F04700C8B4FD /* TcpEngine.cpp */,
+				1B6E873013E2F04700C8B4FD /* TcpEngine.h */,
 				08FB7796FE84155DC02AAC07 /* main.cpp */,
 				1BB13AE413D5681F00988871 /* MySocketStruct.h */,
 			);
@@ -131,6 +136,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8DD76F650486A84900D96B5E /* main.cpp in Sources */,
+				1B6E873113E2F04700C8B4FD /* TcpEngine.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,6 +176,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /Users/fuqifacai/Documents/coco/demo/SimpleSocketSender/;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = macosx10.6;
