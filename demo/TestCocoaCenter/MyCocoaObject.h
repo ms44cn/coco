@@ -32,6 +32,8 @@
 
 @property(retain) NSString*	myTestProperty;
 
+
+-(void)TestStaticLibraryMethods;
 -(void)TestMethod1:(id)sender;
 -(void)TestMethod1:(id)sender:(int)order;//override method
 +(void)TestHowToUseString;

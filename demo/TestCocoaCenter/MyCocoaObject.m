@@ -7,7 +7,7 @@
 //
 
 #import "MyCocoaObject.h"
-
+#import "Common.h"
 
 @implementation MyCocoaObject
 
@@ -30,28 +30,76 @@
 	
 	NSArray* myArrayObject = [NSArray arrayWithObjects:object1, object2, object3, nil];
 	
-	[myArrayObject addObject:@"4"]; //add object to array object
-	[myArrayObject insertObject:@"5" atIndex:5]; //insert object
+
 	
 	NSEnumerator* myEnumator = [myArrayObject objectEnumerator];
 	
 	NSString* aString = @"foo";
+	NSLog(@"Test string is : %@",aString);
 	id anObject = nil;
+	
+	//like C#,the easiest way
+	for(id item in myEnumator)
+	{
+		NSLog(@"First time : %@",item);
+	}
+	
+	//Another way to eunm the array
+	//
+	for ( int i=0;i<[myArrayObject count];i++)
+	{
+		//NSNumber *numberToPrint = [array objectAtIndex:i];
+        NSLog(@"The value at index %d is %@", i, [myArrayObject objectAtIndex:i]);
+	}
 	//traditional way
 	while ((anObject = [myEnumator nextObject])) 
 	{
 		
 		//[anObject doSomethingWithString:aString];
-		NSLog("%@",anObject);
+		NSLog(@"Second is %@",anObject);
 	}
-	//like C#,the easiest way
-	for(id item in myEnumator)
+
+	
+	//Test mutableArray
+
+	NSMutableArray* myMutableArray=[[NSMutableArray alloc]initWithCapacity:4];
+	[myMutableArray addObject:@"3"];
+	for(int j=0;j<[myMutableArray count];j++)
 	{
-		NSLog("Second time : %@",anObject);
+		NSLog(@"Each value is %@" ,[myMutableArray objectAtIndex:j]);
 	}
+									//[myArrayObject addObject:@"4"]; //add object to array object
+									//[myArrayObject insertObject:@"5" atIndex:5]; //insert object
+	
+	
+	//Test bool
+	bool ba=false;
+	bool bc=true;
+	if(ba==bc)
+	{
+		NSLog(@"OK");
+	}
+	
+	NSString* tempStrign = [[NSString alloc]initWithFormat:@"Hello %s ,Number is %d",aString,23];
+	NSLog(@"string length is %d",[tempStrign length]);
+	
+//	if([ba isEqual:bc])
+//	{
+//		NSLOg(@"OK2");
+//	}
+	
 	return 3;
 }
 
+-(void)TestStaticLibraryMethods
+{
+	//Common common;
+	Common* myUtility=[[Common alloc]init];
+	
+	char* src="Hello world";
+	
+	NSLog(@"subclass data %@",[myUtility GetNStringFromChar:src]);
+}
 
 +(void)TestHowToUseString
 {
@@ -65,7 +113,7 @@
 	int size = [@"hello" length];
 	NSString* hello2 = [@"hello" uppercaseString];
 	
-	NSLog("%@",string);
+	NSLog(@"%@ and %@ and %d ,%@,%@",string,hello2,size,stillNotHandy,notHandy);
 	
 }
 
@@ -73,6 +121,7 @@
 {
     id currentObject = self;
     SEL currentMethod = _cmd;
+	
     [currentObject performSelector:currentMethod
                         withObject:parameter]; // 递归调用
 	

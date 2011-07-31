@@ -16,6 +16,7 @@
 	
 }
 
+-(IBAction)TestStaticLibrary:(id)sender;
 - (IBAction) ShowInt:(id)sender;
 - (IBAction) ShowString:(id)sender;
 - (IBAction) ShowMessageBox:(id)sender;

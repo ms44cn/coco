@@ -32,6 +32,8 @@
 {
 	//Declare oc object
 	MyCocoaObject* myData=[[MyCocoaObject alloc]init];
+	NSLog(@"Enter\r\n");
+	
 	if(nil==myData)
 	{
 		assert(FALSE);
@@ -39,10 +41,13 @@
     //Check is that type (like is/as in C#)
 	if([myData isKindOfClass:[MyCocoaObject class]])
 	{
+		NSLog(@"yes it's my kind class\r\n");
 	}
 	
+	[myData TestHowToUseCollectionObjects:3];
+	
 	@try {
-		NSLog(@"%d",myData->a);
+		NSLog(@"A is %d",myData->a);
 	}
 	@catch (NSException * e) {
 		NSLog(@"Detail Error is : %s",e.description);
@@ -52,12 +57,23 @@
 	}
 	
 	
+	
+	
 	[myData release];
 	
 	//Declare native C++ object
 //	FDataStruct* myNativeObject =new FDataStruct();
 //	int a= myNativeObject.TestMethod();
 //	assert(a==100);
+}
+
+-(IBAction)TestStaticLibrary:(id)sender
+{
+	MyCocoaObject* myData=[[MyCocoaObject alloc]init];
+	
+	[myData TestStaticLibraryMethods];
+	
+	[myData release];
 }
 
 -(IBAction)TestSEH:(id)sender
