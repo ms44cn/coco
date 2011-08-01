@@ -26,7 +26,8 @@ public:
 	int GetReceiveMaxLength();	
 	
 	SOCKET ConnectToHost(char ipAddress[], int port);
-	
+	SOCKET GetLastSOCKET();
+	bool IsConnected();
 	//Just send data
 	bool Send(SOCKET mySocket,char* sendingBuffer,int length);
 	
@@ -42,5 +43,6 @@ public:
 private :
 	int m_SendContentMaxLength;
 	int m_ReceiveContentMaxLength;
+	SOCKET m_latestSOCKET;
 };
 

@@ -65,6 +65,15 @@ char* CTcpEngine::GetLocalIpAddress()
 	return myIpAddress;
 }
 
+bool CTcpEngine::IsConnected()
+{
+	return SOCKET_ERROR!=m_latestSOCKET;
+}
+
+SOCKET CTcpEngine::GetLastSOCKET()
+{
+	return m_latestSOCKET;
+}
 
 //Return a valid SOCKET handle, if failed return a SOCKET_ERROR (-1)
 SOCKET CTcpEngine::ConnectToHost(char ipAddress[], int port)
@@ -87,6 +96,8 @@ SOCKET CTcpEngine::ConnectToHost(char ipAddress[], int port)
 		#endif
 		return SOCKET_ERROR;
 	}
+	//Record this socket
+	m_latestSOCKET=mySocket;
 
 
 	struct sockaddr_in servAddr; 
@@ -202,4 +213,8 @@ void CTcpEngine::Close(SOCKET socket)
 	close(socket);
 	#endif
 #endif
+	
+	//Clean members
+	m_latestSOCKET=SOCKET_ERROR;
+	
 }
