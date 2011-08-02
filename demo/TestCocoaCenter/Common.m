@@ -6,6 +6,8 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+//#define MAC_OS 
+
 #import "Common.h"
 #define MAX_PATH 4096
 
@@ -15,17 +17,30 @@
 {
 
 	NSString *ret = [NSString stringWithUTF8String:src];
+	[ret autorelease];
 	
 	return ret;
 }
 
 -(void)MessageBox:(NSString*) text
 {
+#if defined MAC_OS
+	
 	NSAlert *alert = [[[NSAlert alloc] init] autorelease];
 	[alert setMessageText:text];
+	
+#else
+#endif
 }
 
--(char*)GetCharArrary:(NSString*)src
+-(void)dealloc
+{
+	[super dealloc];
+	
+}
+
+
+-(const char*)GetCharArrary:(NSString*)src
 {
 	const char* temp=[src UTF8String];
 	//return const_cast<char*>(temp);
